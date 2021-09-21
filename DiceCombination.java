@@ -8,14 +8,14 @@ public class DiceCombination {
 		long mod = 1000000007;
 		long[] counts = new long[n + 1];
 		counts[0] = 1;
-		for (int i = 1; i <= 6; i++) {
-			for (int j = 0; j < i; j++) {
-				counts[i] += counts[j];
+		counts[1] = 1;
+		for (int i = 2; i < counts.length; i++) {
+			if (i <= 6) {
+				counts[i] = counts[i - 1] * 2;
+			} else {
+				counts[i] = (counts[i - 1] + counts[i - 2] + counts[i - 3] + counts[i - 4] + counts[i - 5]
+						+ counts[i - 6]) % mod;
 			}
-		}
-		for (int i = 6; i < counts.length; i++) {
-			counts[i] = (counts[i - 1] + counts[i - 2] + counts[i - 3] + counts[i - 4] + counts[i - 5] + counts[i - 6])
-					% mod;
 		}
 		System.out.println(counts[n]);
 
